@@ -49,7 +49,7 @@ if (!public_url) {
 var Botkit = require('botkit');
 
 var env = process.env.NODE_ENV || "development";
-var controller = Botkit.sparkbot({
+var sparkController = Botkit.sparkbot({
     log: true,
     public_address: public_url,
     ciscospark_access_token: process.env.SPARK_TOKEN,
@@ -57,7 +57,12 @@ var controller = Botkit.sparkbot({
     webhook_name: process.env.WEBHOOK_NAME || ('built with BotKit (' + env + ')')
 });
 
-var bot = controller.spawn({
+var bot = sparkController.spawn({
+});
+
+
+var dialogflowMiddleware = require('botkit-middleware-dialogflow')({
+    token: process.env.DIALOGFLOW_CLIENT_ACCESS_KEY,
 });
 
 
@@ -66,8 +71,8 @@ var bot = controller.spawn({
 //
 
 var port = process.env.PORT || 3000;
-controller.setupWebserver(port, function (err, webserver) {
-    controller.createWebhookEndpoints(webserver, bot, function () {
+sparkController.setupWebserver(port, function (err, webserver) {
+    sparkController.createWebhookEndpoints(webserver, bot, function () {
         console.log("Cisco Spark: Webhooks set up!");
     });
 
@@ -102,7 +107,7 @@ controller.setupWebserver(port, function (err, webserver) {
 var normalizedPath = require("path").join(__dirname, "skills");
 require("fs").readdirSync(normalizedPath).forEach(function (file) {
     try {
-        require("./skills/" + file)(controller, bot);
+        require("./skills/" + file)(sparkController, bot);
         console.log("Cisco Spark: loaded skill: " + file);
     }
     catch (err) {
