@@ -103,6 +103,10 @@ sparkController.setupWebserver(port, function (err, webserver) {
     console.log("Cisco Spark: healthcheck available at: " + process.env.HEALTHCHECK_ROUTE);
 });
 
+sparkController.hears(['next-train'], 'direct_message', dialogflowMiddleware.hears, function(bot, message) {
+    bot.reply(message, 'Hello from Dialogflow !');
+});
+
 
 //
 // Load skills
