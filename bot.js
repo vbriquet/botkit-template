@@ -61,9 +61,13 @@ var bot = sparkController.spawn({
 });
 
 
+//
+// Addition for Dialogflow middleware
+//
 var dialogflowMiddleware = require('botkit-middleware-dialogflow')({
     token: process.env.DIALOGFLOW_CLIENT_ACCESS_KEY,
 });
+sparkController.middleware.receive.use(dialogflowMiddleware.receive);
 
 
 //
