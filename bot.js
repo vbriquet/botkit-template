@@ -50,6 +50,7 @@ var Botkit = require('botkit');
 
 var env = process.env.NODE_ENV || "development";
 var sparkController = Botkit.sparkbot({
+    debug: true,
     log: true,
     public_address: public_url,
     ciscospark_access_token: process.env.SPARK_TOKEN,
@@ -109,6 +110,7 @@ sparkController.setupWebserver(port, function (err, webserver) {
 //
 
 sparkController.hears(['next-train'], 'direct_message', dialogflowMiddleware.hears, function(bot, message) {
+    console.log("we have received the following message from Dialogflow: " + message);
     bot.reply(message, 'Hello from Dialogflow !');
 });
 
