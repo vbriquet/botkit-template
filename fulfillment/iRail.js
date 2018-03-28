@@ -27,15 +27,14 @@ var botResponse = function (message) {
 	let nextTrain = parameters.followingTrains;
 
 	// Call the iRail API
-	sendiRailrequest (fromStation, destStation).then((output) => {
+	return sendiRailrequest (fromStation, destStation).then((output) => {
 		response =  buildResponse (output, nextTrain);
 		nextTrain = String (parseInt (nextTrain) + 1 );
 		responseJson.speech = response;
 		responseJson.displayText = response;
 		responseJson.contextOut = [{"name":"sncbnexttrain-followup", "lifespan":2, "parameters":{"followingTrains":nextTrain}}];
+		return responseJson;
 	});
-	console.log ("the iRail module is returning the following response: " + responseJson.speech);
-	return responseJson;
 }
 
 module.exports.botResponse = botResponse;
