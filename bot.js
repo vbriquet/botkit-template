@@ -111,10 +111,8 @@ sparkController.setupWebserver(port, function (err, webserver) {
 
 sparkController.hears(['next-train'], 'direct_message,direct_mention', dialogflowMiddleware.hears, function(bot, message) {
     bot.reply(message, "I understood you wish to travel to :" + message.entities.destStation);
-    let botResponse = "";
-    require("./fulfillment/iRail.js")(message, botResponse);
-    callIrail (message, botResponse);
-    bot.reply(message, botResponse.speech);
+    require("./fulfillment/iRail");
+    bot.reply(message, iRail.botResponse(message).speech);
 });
 
 sparkController.hears(['following-trains'], 'direct_message,direct_mention', dialogflowMiddleware.hears, function(bot, message) {
