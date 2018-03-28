@@ -34,6 +34,7 @@ var botResponse = function (message) {
 		responseJson.displayText = response;
 		responseJson.contextOut = [{"name":"sncbnexttrain-followup", "lifespan":2, "parameters":{"followingTrains":nextTrain}}];
 	});
+	console.log ("the iRail module is returning the following response: " + responseJson.speech);
 	return responseJson;
 }
 
