@@ -110,11 +110,11 @@ sparkController.setupWebserver(port, function (err, webserver) {
 //
 
 sparkController.hears(['next-train'], 'direct_message,direct_mention', dialogflowMiddleware.hears, function(bot, message) {
-    bot.reply(message, message.fulfillment.speech);
+    bot.reply(message, "I understood you wish to travel to :" + message.entities.destStation);
 });
 
 sparkController.hears(['following-trains'], 'direct_message,direct_mention', dialogflowMiddleware.hears, function(bot, message) {
-    bot.reply(message, message.fulfillment.speech);
+    bot.reply(message, "I understood you wish the following train to :" + message.entities.destStation);
 });
 
 sparkController.hears([/^color$/], 'direct_message,direct_mention', function (bot, message) {
