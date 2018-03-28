@@ -86,6 +86,7 @@ function buildResponse (responseString, trainNumber) {
 		botAnswer = "Sorry I could not find an answer to your question. Could you please try again ?";
 	}
 	console.log ("my bot response is: " + botAnswer);
+	bot.reply (message, botAnswer);
 	return botAnswer;
 }
 
