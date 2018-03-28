@@ -103,8 +103,24 @@ sparkController.setupWebserver(port, function (err, webserver) {
     console.log("Cisco Spark: healthcheck available at: " + process.env.HEALTHCHECK_ROUTE);
 });
 
+
+//
+// Handling the conversation itself, with hears/say/ask/reply
+//
+
 sparkController.hears(['next-train'], 'direct_message', dialogflowMiddleware.hears, function(bot, message) {
     bot.reply(message, 'Hello from Dialogflow !');
+});
+
+sparkController.hears([/^color$/], 'direct_message,direct_mention', function (bot, message) {
+
+    bot.startConversation(message, function (err, convo) {
+        convo.say('This is a BotKit conversation sample.');
+        convo.ask('What is your favorite color?', function (response, convo) {
+            convo.say("Cool, I like '" + response.text + "' too!");
+            convo.next();
+        });
+    });
 });
 
 
