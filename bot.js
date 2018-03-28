@@ -113,6 +113,10 @@ sparkController.hears(['next-train'], 'direct_message,direct_mention', dialogflo
     bot.reply(message, message.fulfillment.speech);
 });
 
+sparkController.hears(['following-trains'], 'direct_message,direct_mention', dialogflowMiddleware.hears, function(bot, message) {
+    bot.reply(message, message.fulfillment.speech);
+});
+
 sparkController.hears([/^color$/], 'direct_message,direct_mention', function (bot, message) {
 
     bot.startConversation(message, function (err, convo) {
