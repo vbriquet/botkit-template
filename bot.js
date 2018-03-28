@@ -110,7 +110,7 @@ sparkController.setupWebserver(port, function (err, webserver) {
 //
 
 sparkController.hears(['next-train'], 'direct_message,direct_mention', dialogflowMiddleware.hears, function(bot, message) {
-    bot.reply(message, 'Hello from Dialogflow !');
+    bot.reply(message, message.fulfillment.speech);
 });
 
 sparkController.hears([/^color$/], 'direct_message,direct_mention', function (bot, message) {
