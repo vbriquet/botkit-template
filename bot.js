@@ -109,11 +109,10 @@ sparkController.setupWebserver(port, function (err, webserver) {
 // Handling the conversation itself, with hears/say/ask/reply
 //
 
-require("./fulfillment/iRail.js")(message, response);
-
 sparkController.hears(['next-train'], 'direct_message,direct_mention', dialogflowMiddleware.hears, function(bot, message) {
     bot.reply(message, "I understood you wish to travel to :" + message.entities.destStation);
     let botResponse = "";
+    require("./fulfillment/iRail.js")(message, botResponse);
     callIrail (message, botResponse);
     bot.reply(message, botResponse.speech);
 });
