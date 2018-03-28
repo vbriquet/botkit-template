@@ -109,26 +109,6 @@ sparkController.hears(['next-train'], 'direct_message', dialogflowMiddleware.hea
 
 
 //
-// Load skills
-//
-
-var normalizedPath = require("path").join(__dirname, "skills");
-require("fs").readdirSync(normalizedPath).forEach(function (file) {
-    try {
-        require("./skills/" + file)(sparkController, bot);
-        console.log("Cisco Spark: loaded skill: " + file);
-    }
-    catch (err) {
-        if (err.code == "MODULE_NOT_FOUND") {
-            if (file != "utils") {
-                console.log("Cisco Spark: could not load skill: " + file);
-            }
-        }
-    }
-});
-
-
-//
 // Cisco Spark Utilities
 //
 
