@@ -109,8 +109,7 @@ sparkController.setupWebserver(port, function (err, webserver) {
 // Handling the conversation itself, with hears/say/ask/reply
 //
 
-sparkController.hears(['next-train'], 'direct_message', dialogflowMiddleware.hears, function(bot, message) {
-    console.log("we have received the following message from Dialogflow: " + message);
+sparkController.hears(['next-train'], 'direct_message,direct_mention', dialogflowMiddleware.hears, function(bot, message) {
     bot.reply(message, 'Hello from Dialogflow !');
 });
 
