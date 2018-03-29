@@ -38,7 +38,7 @@ var botResponse = function (message, bot) {
 	});
 }
 
-module.exports.botResponse = botResponse (message, bot);
+module.exports.botResponse = botResponse;
 
 
 /*
