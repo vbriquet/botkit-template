@@ -9,7 +9,7 @@ const moment = require('moment-timezone');
 * Function to call iRail with the parameters received from Dialogflow
 */
 	
-var botResponse = function (message, bot) {
+module.exports = function (message, bot) {
 	let parameters = message.entities;
 	let response = "";
 	let responseJson = {};
@@ -37,8 +37,6 @@ var botResponse = function (message, bot) {
 //		return responseJson;
 	});
 }
-
-module.exports.botResponse = botResponse;
 
 
 /*
