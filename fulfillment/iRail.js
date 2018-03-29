@@ -29,15 +29,16 @@ var botResponse = function (message, bot) {
 	// Call the iRail API
 	return sendiRailrequest (fromStation, destStation).then((output) => {
 		response =  buildResponse (output, nextTrain);
-		nextTrain = String (parseInt (nextTrain) + 1 );
-		responseJson.speech = response;
-		responseJson.displayText = response;
-		responseJson.contextOut = [{"name":"sncbnexttrain-followup", "lifespan":2, "parameters":{"followingTrains":nextTrain}}];
-		return responseJson;
+		bot.reply (message, response);
+//		nextTrain = String (parseInt (nextTrain) + 1 );
+//		responseJson.speech = response;
+//		responseJson.displayText = response;
+//		responseJson.contextOut = [{"name":"sncbnexttrain-followup", "lifespan":2, "parameters":{"followingTrains":nextTrain}}];
+//		return responseJson;
 	});
 }
 
-module.exports.botResponse = botResponse;
+module.exports.botResponse = botResponse (message, bot);
 
 
 /*
