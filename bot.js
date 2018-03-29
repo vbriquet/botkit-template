@@ -110,15 +110,11 @@ sparkController.setupWebserver(port, function (err, webserver) {
 //
 
 sparkController.hears(['next-train'], 'direct_message,direct_mention', dialogflowMiddleware.hears, function(bot, message) {
-    bot.reply(message, "I understood you wish to travel to " + message.entities.destStation);
-    console.log ("The JSON message received is:\n" + JSON.stringify (message));
     var iRail = require("./fulfillment/iRail")(message,bot);
-  //  bot.reply(message, iRail.botResponse(message).speech);
- //   console.log ("the prepared JSON response is : " + iRail.botResponse(message, bot).speech);
 });
 
 sparkController.hears(['following-trains'], 'direct_message,direct_mention', dialogflowMiddleware.hears, function(bot, message) {
-    bot.reply(message, "I understood you wish the following train to :" + message.entities.destStation);
+    var iRail = require("./fulfillment/iRail")(message,bot);
 });
 
 sparkController.hears([/^color$/], 'direct_message,direct_mention', function (bot, message) {
