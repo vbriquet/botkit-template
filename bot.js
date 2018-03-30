@@ -118,6 +118,8 @@ sparkController.hears(['following-trains'], 'direct_message,direct_mention', dia
 });
 
 sparkController.hears(['smalltalk'], 'direct_message,direct_mention', dialogflowMiddleware.hears, function(bot, message) {
+    console.log ("JSON   message received from SmallTalk: " + JSON.stringify(message));
+    console.log ("Speech message received from SmallTalk: " + message.fulfillment.speech));
     bot.reply (message, message.fulfillment.speech);
 });
 
