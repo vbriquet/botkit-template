@@ -117,6 +117,10 @@ sparkController.hears(['following-trains'], 'direct_message,direct_mention', dia
     var iRail = require("./fulfillment/iRail")(message,bot);
 });
 
+sparkController.hears(['smalltalk'], 'direct_message,direct_mention', dialogflowMiddleware.hears, function(bot, message) {
+    bot.reply (message, message.fulfillment.speech);
+});
+
 sparkController.hears([/^color$/], 'direct_message,direct_mention', function (bot, message) {
 
     bot.startConversation(message, function (err, convo) {
