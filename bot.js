@@ -109,7 +109,7 @@ sparkController.setupWebserver(port, function (err, webserver) {
 // Handling the conversation itself, with hears/say/ask/reply
 //
 
-sparkController.hears('welcome,fallback', 'direct_message,direct_mention', dialogflowMiddleware.hears, function(bot, message) {
+sparkController.hears('welcome,Default Fallback Intent', 'direct_message,direct_mention', dialogflowMiddleware.hears, function(bot, message) {
     bot.reply (message, message.fulfillment.speech);
 });
 
