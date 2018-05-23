@@ -109,6 +109,10 @@ sparkController.setupWebserver(port, function (err, webserver) {
 // Handling the conversation itself, with hears/say/ask/reply
 //
 
+sparkController.hears('welcome,fallback', 'direct_message,direct_mention', dialogflowMiddleware.hears, function(bot, message) {
+    bot.reply (message, message.fulfillment.speech);
+});
+
 sparkController.hears(['next-train'], 'direct_message,direct_mention', dialogflowMiddleware.hears, function(bot, message) {
     var iRail = require("./fulfillment/iRail")(message,bot);
 });
@@ -121,17 +125,6 @@ sparkController.hears('smalltalk(.*)', 'direct_message,direct_mention', dialogfl
     console.log ("JSON   message received from SmallTalk: " + JSON.stringify(message));
     console.log ("Speech message received from SmallTalk: " + message.fulfillment.speech);
     bot.reply (message, message.fulfillment.speech);
-});
-
-sparkController.hears([/^color$/], 'direct_message,direct_mention', function (bot, message) {
-
-    bot.startConversation(message, function (err, convo) {
-        convo.say('This is a BotKit conversation sample.');
-        convo.ask('What is your favorite color?', function (response, convo) {
-            convo.say("Cool, I like '" + response.text + "' too!");
-            convo.next();
-        });
-    });
 });
 
 
